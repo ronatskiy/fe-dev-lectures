@@ -376,11 +376,13 @@ npm run dev lecture-XX
 
 ```html
 <div class="title-slide">
+  <div class="discipline">Дисципліна: "Сучасні Веб-технології та Frontend-розробка"</div>
   <h1>Назва лекції</h1>
   <div class="lecture-number">Лекція N</div>
-  <div class="slide-footer">
-    <div class="lecturer">Викладачі: Місюра С.Ю., Онацький Р.Л.</div>
-    <div class="department">НТУ «ХПІ» | Кафедра ММІ</div>
+  
+  <div class="lecturers-card">
+    <span class="lecturer-name">к.т.н., доц. Місюра Сергій Юрійович</span>
+    <span class="lecturer-name">Онацький Роман Леонідович</span>
   </div>
 </div>
 

@@ -13,10 +13,14 @@ revealOptions:
 
 <div class="title-slide">
   <h1>Основи HTML. Структура документа</h1>
+  <div class="discipline">
+    Дисципліна: "Сучасні Веб-технології та Frontend-розробка"
+  </div>
   <div class="lecture-number">Лекція 2</div>
-  <div class="slide-footer">
-    <div class="lecturer">Викладачі: Місюра С.Ю., Онацький Р.Л.</div>
-    <div class="department">НТУ «ХПІ» | Кафедра ІКМ</div>
+  
+  <div class="lecturers-card">
+    <span class="lecturer-name">к.т.н., доц. Місюра Сергій Юрійович</span>
+    <span class="lecturer-name">Онацький Роман Леонідович</span>
   </div>
 </div>
 
