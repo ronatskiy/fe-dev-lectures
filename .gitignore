@@ -15,3 +15,5 @@ src/lecture-*/export/
 .vscode/
 *.swp
 *.swo
+export/
+*.pdf

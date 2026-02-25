@@ -2,8 +2,7 @@
 title: Основи HTML. Структура документа
 separator: <!--s-->
 verticalSeparator: <!--v-->
-theme: css/theme.css
-highlightTheme: github
+highlightTheme: vs2015
 revealOptions:
   transition: slide
   transitionSpeed: default

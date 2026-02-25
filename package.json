@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/run.js dev",
     "start": "node scripts/run.js start",
+    "print": "node scripts/run.js pdf",
     "export": "node scripts/run.js export"
   },
   "keywords": [],
@@ -13,6 +14,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "puppeteer": "^24.37.5",
     "reveal-md": "^6.1.2"
   }
 }

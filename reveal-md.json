@@ -1,3 +1,6 @@
 {
-  "template": "templates/reveal.html"
+  "template": "templates/reveal.html",
+  "puppeteerLaunchConfig": {
+    "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+  }
 }
