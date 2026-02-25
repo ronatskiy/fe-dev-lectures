@@ -5,89 +5,80 @@
 ## Структура
 
 ```
-├── src/
+├── slides/
 │   ├── lecture-01/
-│   │   ├── index.md      # Контент лекції
-│   │   └── assets/       # Зображення, файли
+│   │   ├── lecture-01.md  # Контент лекції
+│   │   └── assets/        # Зображення, файли
 │   └── lecture-02/
 ├── css/
-│   └── theme.css         # Кастомна тема Reveal.js
+│   └── theme.css          # Кастомна тема Reveal.js
 ├── scripts/
-│   └── run.js            # Скрипт запуску
-├── dist/                 # Експортовані HTML
-├── COURSE_PLAN.md        # План курсу
+│   └── run.js             # Скрипт-ранер (обробляє шляхи)
+├── pdf/                   # Згенеровані PDF файли
+├── dist/                  # Експортовані HTML (статичний сайт)
+├── COURSE_PLAN.md         # План курсу
 └── package.json
 ```
 
 ## Використання
 
+Всі команди приймають назву папки лекції як аргумент.
+
 ### Режим розробки (live reload)
 
 ```bash
-npm run dev                  # lecture-01 за замовчуванням
-npm run dev -- lecture-02    # вказати іншу лекцію
+npm run dev -- lecture-01    # з авто-відкриттям браузера
+npm run start -- lecture-01  # без авто-відкриття
 ```
 
 Презентація: http://localhost:1950
 
-### Перегляд без live reload
+### Генерація PDF
 
 ```bash
-npm run start -- lecture-01
+npm run print -- lecture-01
 ```
 
-### Експорт в HTML
+Файл буде збережено в папку `pdf/`. Потребує встановленого `puppeteer`.
+
+### Експорт в статичний HTML
 
 ```bash
 npm run export -- lecture-01
 ```
 
+Результат у папці `dist/`.
+
 ## Кастомна тема
 
-Тема знаходиться в `css/theme.css` — повноцінний CSS файл без SCSS і build-step.
-
-Підключається в frontmatter кожної лекції:
-
-```yaml
----
-title: Назва лекції
-separator: <!--s-->
-verticalSeparator: <!--v-->
-theme: css/theme.css
-highlightTheme: github
----
-```
-
-> **Важливо:** `reveal-md` роздає файли проекту через `/_assets/`. Тому шлях у frontmatter — відносно кореня проекту (`css/theme.css`), не відносно файлу лекції.
+Тема знаходиться в `css/theme.css`. Вона підключається автоматично скріптом `run.js` через прапорець `--theme`.
 
 Для редагування стилів змінюй CSS-змінні в `:root` на початку `css/theme.css`.
 
 ## Нотатки спікера
 
-`<aside class="notes">` — працює в режимі спікера (клавіша `S`)
+`<aside class="notes">` — працює в режимі спікера (клавіша `S`). Важливо тримати порожній рядок після тега для коректного рендеру Markdown.
 
 ## Титульний слайд
+
+Кожна лекція починається з HTML-блоку:
 
 ```html
 <div class="title-slide">
   <h1>Назва лекції</h1>
+  <div class="discipline">Назва дисципліни</div>
   <div class="lecture-number">Лекція N</div>
-  <div class="slide-footer">
-    <div class="lecturer">Викладачі: ПІБ</div>
-    <div class="department">НТУ «ХПІ» | Кафедра ІКМ</div>
+  <div class="lecturers-card">
+    <span class="lecturer-name">Ім'я Викладача</span>
   </div>
 </div>
 ```
 
 ## Створення нової лекції
 
-```bash
-mkdir src/lecture-XX/assets
-```
-
-Створіть `src/lecture-XX/index.md`, скопіювавши frontmatter з існуючої лекції.
-
-Зображення додавайте в папку `assets/`, посилайтесь так: `assets/image.png`
+1. Створіть папку `slides/lecture-XX/`.
+2. Створіть у ній `lecture-XX.md`.
+3. Скопіюйте frontmatter та титульний слайд з існуючих лекцій.
 
 ## Клавіші Reveal.js
 
@@ -95,5 +86,6 @@ mkdir src/lecture-XX/assets
 |-----|-----|
 | `Space` | Наступний слайд |
 | `S` | Speaker view |
-| `Esc` | Огляд |
+| `Esc` | Огляд (Overview) |
 | `F` | Fullscreen |
+| `?` | Довідка по клавішах |

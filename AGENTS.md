@@ -24,20 +24,21 @@
 
 **Запуск:**
 ```bash
-npm run dev lecture-01   # режим розробки, порт 1950
-npm run export lecture-01  # експорт в HTML → dist/
+npm run dev -- lecture-01    # режим розробки, порт 1950
+npm run print -- lecture-01   # експорт в PDF → pdf/
+npm run export -- lecture-01  # експорт в HTML → dist/
 ```
 
 ---
 
-## Структура лекції
+### Структура проекту
 
-Кожна лекція — це папка `src/lecture-XX/`:
+Кожна лекція — це папка `slides/lecture-XX/`:
 
 ```
-src/lecture-01/
-├── index.md      # Контент слайдів
-└── assets/       # Зображення
+slides/lecture-01/
+├── lecture-01.md  # Контент слайдів
+└── assets/        # Зображення
 ```
 
 ### Frontmatter (обов'язково)
@@ -49,7 +50,6 @@ src/lecture-01/
 title: Назва лекції
 separator: <!--s-->
 verticalSeparator: <!--v-->
-theme: css/theme.css
 highlightTheme: github
 revealOptions:
   transition: slide
@@ -58,6 +58,8 @@ revealOptions:
   navigationMode: linear
 ---
 ```
+
+> **Тема:** Не додавай `theme` у frontmatter. Вона підключається автоматично в `scripts/run.js` через прапорець `--theme css/theme.css`.
 
 > `navigationMode: linear` — студент просувається лінійно стрілкою вправо, проходячи через всі вертикальні слайди поспіль. Не прибирай без необхідності.
 
@@ -329,7 +331,7 @@ console.log(sum);   // крок 3: результат
 
 ### Крок 3: Генерація після затвердження
 
-Після підтвердження плану — генеруй повний файл `src/lecture-XX/index.md`.
+Після підтвердження плану — генеруй повний файл `slides/lecture-XX/lecture-XX.md`.
 
 **Чеклист перед збереженням:**
 - [ ] Frontmatter містить `revealOptions` з `navigationMode: linear`
@@ -339,13 +341,14 @@ console.log(sum);   // крок 3: результат
 - [ ] Кожен слайд має `<aside class="notes">` з 180–250 словами
 - [ ] Є фінальний слайд "Наступна лекція"
 - [ ] На кожному слайді є акцентний рядок-висновок з `class="fragment"` знизу — і тільки він
-- [ ] Жодного `../../` у шляхах
+- [ ] Жодного `theme` у YAML (контролюється ранером)
+- [ ] Створено папку `pdf/` (якщо ще не існує) для експорту
 
 ### Крок 4: Перевірка
 
 Запусти і переглянь у браузері:
 ```bash
-npm run dev lecture-XX
+npm run dev -- lecture-XX
 ```
 
 ---
@@ -399,13 +402,9 @@ npm run dev lecture-XX
 
 ### Як підключити
 
-В frontmatter лекції:
+Вона підключається автоматично скріптом `run.js`. В самому Markdown-файлі її прописувати **не потрібно**.
 
-```yaml
-theme: css/theme.css
-```
-
-> **Важливо:** `reveal-md` роздає файли проекту через `/_assets/<шлях_від_кореня>`. Тому шлях `css/theme.css` у frontmatter → сервер шукає `/_assets/css/theme.css` → файл `c:/…/css/theme.css`. Не використовуй відносні `../../` шляхи — вони не спрацюють.
+> **Чому так?** `reveal-md` у режимі CLI потребує шлях до теми або в YAML, або в аргументах. Оскільки ми використовуємо кастомну структуру папок `slides/`, ми винесли це в ранер, щоб уникнути плутанини з відносними шляхами на кшталт `../../css/theme.css`.
 
 ### Як редагувати
 
